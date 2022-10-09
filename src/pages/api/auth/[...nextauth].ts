@@ -1,22 +1,20 @@
 import { query as q } from 'faunadb'
 
-import NextAuth from 'next-auth'
+import NextAuth, * as NextAuthProps from 'next-auth'
 import Providers from 'next-auth/providers'
+import GithubProvider from "next-auth/providers/github"
 
 import { fauna } from '../../../services/fauna';
 
-export default NextAuth({
+export const authOptions: NextAuthProps.NextAuthOptions = {
   providers: [
-    Providers.GitHub({
+    GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      scope: 'read:user'
+
     }),
   ],
-  jwt:{
-     signingKey: process.env.SIGNINKEY,
-  },
-  // callbacks: {
+  callbacks: {
   //   async session(session) {
   //     try {
   //       const userActiveSubscription = await fauna.query(
@@ -85,5 +83,7 @@ export default NextAuth({
   //       return false
   //     }
   //   },
-  //}
-})
+  }
+}
+
+export default NextAuth(authOptions)
