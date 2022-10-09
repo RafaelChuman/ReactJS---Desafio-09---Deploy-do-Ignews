@@ -17,9 +17,9 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
   ],
-  // jwt:{
-  //   signingKey: process.env.SIGNINKEY,
-  // },
+  jwt:{
+     signingKey: process.env.SIGNINKEY,
+  },
   callbacks: {
     async session(session) {
       try {
