@@ -7,8 +7,6 @@ import '../styles/global.scss';
 
 
 
-
-
 function MyApp({ 
   Component, 
   pageProps: {session, ...pageProps} 
